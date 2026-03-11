@@ -1,3 +1,4 @@
+import applicationError from "../../middleware/applicationError.js";
 import UserRepository from "./user.repository.js";
 import bcrypt from 'bcrypt'
 export default class UserController{
@@ -14,13 +15,13 @@ if (!passwordRegex.test(password)) {
 }
 const hashedPassword = await bcrypt.hash(password,12)
 const userData={name,email,password:hashedPassword}
-await this.userRepository.signup(userData)   
-return res.status(200).send(userData)
-        }catch(err){
-
+const newUser=await this.userRepository.signup(userData)   
+if(!newUser)return res.status(400).send("User not found");
+return res.status(200).send(newUser)
+}catch(err){
+console.log(err)
+throw new applicationError("Something went wrong")
         }
-
-
 }
     async signin(req,res,next){
     

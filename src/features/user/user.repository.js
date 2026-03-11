@@ -1,6 +1,9 @@
+import { UserModel } from "./user.model.js";
 export default class UserRepository{
-      async signup(user){
-
+    async signup(userData){
+const newUser = new UserModel(userData);
+await newUser.save()
+return newUser
     }
     async signin(){
 
