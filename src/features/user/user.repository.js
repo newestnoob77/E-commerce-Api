@@ -8,6 +8,9 @@ return newUser
     async signin(){
 
     }
+    async findByEmail(email){
+        return await UserModel.findOne(email)
+    }
     async logout(){
 
     }

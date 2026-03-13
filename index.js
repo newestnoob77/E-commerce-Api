@@ -5,6 +5,7 @@ import applicationError from "./src/middleware/applicationError.js"
 import mongoose from "mongoose"
 import { userRouter } from "./src/features/user/user.router.js"
 const app = express()
+app.use(express.json())
 app.use("/api/users",userRouter)
 app.use((err,req,res,next)=>{
     console.log(err)
