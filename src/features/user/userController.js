@@ -48,9 +48,27 @@ return res.status(200).send({token})
    }   
 }
     async logout(req,res,next){
-
+try{
+const{userId,token}=req.body    
+const result = await this.userRepository.logout(userId,token)
+if(!result) return res.status(401).send("Invalid user")
+return res.status(201).send({message:`User of id :${userId} of ${token} has successfully logged out`})
+}
+catch(err){
+    console.log(err)
+    throw new applicationError("Somethiong went wrong")
+}
     }
     async logoutAllDeivce(req,res,next){
+        try{
+            const {userId}=req.body
+            const result = await this.userRepository.logoutAllDeivce(userId)
+            if(!result) return res.status(201).send("Invalid user")
+            return res.status(201).send({message:`User of id :${userId} , logged out from all devices`})
+        }catch(err){
+            console.log(err)
+            throw new applicationError("Something went wrong")
+        }
 
     }
 }
