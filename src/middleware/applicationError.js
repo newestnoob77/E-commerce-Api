@@ -1,6 +1,7 @@
 export default class applicationError extends Error{
-    constructor(code,message){
-        this.code=code
+    constructor(message,code){
         super(message)
+        this.code=code
+        
     }
 }
