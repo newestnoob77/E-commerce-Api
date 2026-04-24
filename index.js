@@ -20,7 +20,7 @@ app.use((err,req,res,next)=>{
         return res.status(err.code).send(err.message)
     }
 })
-app.listen(3000,()=>{
+app.listen(5000,()=>{
     console.log("Server is listening")
     connectMongoose()
 })
